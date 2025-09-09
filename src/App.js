@@ -7,7 +7,7 @@ import Nav from './Component/Navbar';
 function App() {
   return (
     <Router>
-    <Nav title="React app"/>
+    <Nav title="TextUtils"/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
