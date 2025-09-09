@@ -115,7 +115,7 @@ function Form() {
       <button onClick={handleOnCopy} className="btn btn-primary my-4">
          {copyBtn}
       </button>
-      <button onClick={handleOnClear} className="btn btn-primary mx-4 my-4">
+      <button onClick={handleOnClear} className="btn btn-primary mx-4 my-auto">
          Clear
       </button>
 

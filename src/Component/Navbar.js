@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import '../App.css'
 
 function Nav(props) {
     const [mode, setMode] = useState('dark');
@@ -56,27 +57,27 @@ function Nav(props) {
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <Link
-                    className="nav-link active"
+                  <NavLink
+                    className={({isActive}) => 'nav-link' + (isActive ? ' active' : '')}
                     aria-current="page"
                     to='/'
                   >
                     Home
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <Link
-                    className="nav-link active"
+                  <NavLink
+                    className={({isActive}) => 'nav-link' + (isActive ? ' active' : '')}
                     aria-current="page"
                     to='/about'
                   >
                     About
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link active" to='/contact'>
+                  <NavLink className={({isActive}) => 'nav-link' + (isActive ? ' active' : '')} to='/contact'>
                     Contact
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
               <div className="container-fluid d-flex justify-content-end">
