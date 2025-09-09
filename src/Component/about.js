@@ -4,7 +4,7 @@ function About() {
       <div className="container d-flex flex-column justify-content-center align-items-center">
         <h1 className="my-5">About :</h1>
         <div className="container border rounded border-primary p-4 w-75">
-          <h3>This is a Text utility page.</h3>
+          <h3>This is a Text Utility page.</h3>
           <p className="mt-3">
             TextUtils helps you manipulate and analyze your text quickly.
             Whether you're a writer, student, programmer, or social media
