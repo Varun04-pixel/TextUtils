@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Nav(props) {
     const [mode, setMode] = useState('dark');
@@ -35,7 +36,7 @@ function Nav(props) {
           }}
         >
           <div className="container-fluid">
-            <a className="navbar-brand mx-4" href="../public/index.html">
+            <a className="navbar-brand mx-4" to='/'>
               {props.title}
             </a>
             <button
@@ -55,27 +56,27 @@ function Nav(props) {
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a
+                  <Link
                     className="nav-link active"
                     aria-current="page"
-                    href="../public/index.html"
+                    to='/'
                   >
-                    {props.navItems[0]}
-                  </a>
+                    Home
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a
+                  <Link
                     className="nav-link active"
                     aria-current="page"
-                    href="../public/index.html"
+                    to='/about'
                   >
-                    {props.navItems[1]}
-                  </a>
+                    About
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link active" href="../public/index.html">
-                    {props.navItems[2]}
-                  </a>
+                  <Link className="nav-link active" to='/contact'>
+                    Contact
+                  </Link>
                 </li>
               </ul>
               <div className="container-fluid d-flex justify-content-end">
@@ -89,4 +90,3 @@ function Nav(props) {
 }
 
 export default Nav;
-<img src="" alt="do-not-disturb-2"></img>

@@ -1,16 +1,17 @@
-import Nav from './Component/Navbar';
-import Form from './Component/Form';
-
-const items = ['Home', 'About', 'Contact'];
+import Home from './Component/home';
+import About from './Component/about';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Contact from './Component/contact';
 
 function App() {
   return (
-    <>
-      < Nav title="React app" navItems={items} />
-      <div className="my-5">
-        < Form />
-      </div>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
   );
 }
 
