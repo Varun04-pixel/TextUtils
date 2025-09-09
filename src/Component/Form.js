@@ -4,6 +4,22 @@ function Form() {
   const [text, setText] = useState("");
   const [copyBtn, setCoptBtn] = useState('Copy Text')
 
+  const trimText = (str) => {
+    let newText = ''
+    let spaceSeen = false
+    for(let a of str) {
+      if(a === " ") {
+        if(!spaceSeen) {
+          newText += " "
+          spaceSeen = true
+        }
+      } else {
+        newText += a;
+        spaceSeen = false
+      }
+    }
+    return newText
+  }
   const handleOnChange = (event) => {
     setText(event.target.value);
   }
@@ -16,44 +32,31 @@ function Form() {
     setText(newText);
   }
   const handleOnClickSentence = () => {
-    handleOnClickTrim();
+    let trimmedText = trimText(text);
     let newText = "";
-    for(let i=0; i<text.length; i++) {
+    for(let i=0; i<trimmedText.length; i++) {
       if(i===0) {
-        newText += text[i].toUpperCase();
+        newText += trimmedText[i].toUpperCase();
         i++;
       }
-      if(text[i] === ".") {
-        if(text[i+1] !== " ") {
+      if(trimmedText[i] === ".") {
+        if(trimmedText[i+1] !== " ") {
           newText += ". ";
-          newText += text[i+1].toUpperCase();
+          newText += trimmedText[i+1].toUpperCase();
           i++;
         } else {
           newText += ". ";
-          newText += text[i+2].toUpperCase();
+          newText += trimmedText[i+2].toUpperCase();
           i+=2;
         }
       } else {
-        newText += text[i].toLowerCase();
+        newText += trimmedText[i].toLowerCase();
       }
     }
     setText(newText);
   }
   const handleOnClickTrim = () => {
-    let newText = ''
-    let spaceSeen = false
-    for(let a of text) {
-      if(a === " ") {
-        if(!spaceSeen) {
-          newText += " "
-          spaceSeen = true
-        }
-      } else {
-        newText += a;
-        spaceSeen = false
-      }
-    }
-    setText(newText)
+    setText(trimText(text));
   }
   const handleOnClickTitle = () => {
     const newText = text.split(" ").filter((ele) => {
