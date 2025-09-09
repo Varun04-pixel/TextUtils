@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 function Form() {
   const [text, setText] = useState("");
+  const [copyBtn, setCoptBtn] = useState('Copy Text')
 
   const handleOnChange = (event) => {
     setText(event.target.value);
@@ -14,9 +15,45 @@ function Form() {
     const newText = text.toLowerCase();
     setText(newText);
   }
-  const handleOnClickTrim = () => {
-    const newText = text.trim();
+  const handleOnClickSentence = () => {
+    handleOnClickTrim();
+    let newText = "";
+    for(let i=0; i<text.length; i++) {
+      if(i===0) {
+        newText += text[i].toUpperCase();
+        i++;
+      }
+      if(text[i] === ".") {
+        if(text[i+1] !== " ") {
+          newText += ". ";
+          newText += text[i+1].toUpperCase();
+          i++;
+        } else {
+          newText += ". ";
+          newText += text[i+2].toUpperCase();
+          i+=2;
+        }
+      } else {
+        newText += text[i].toLowerCase();
+      }
+    }
     setText(newText);
+  }
+  const handleOnClickTrim = () => {
+    let newText = ''
+    let spaceSeen = false
+    for(let a of text) {
+      if(a === " ") {
+        if(!spaceSeen) {
+          newText += " "
+          spaceSeen = true
+        }
+      } else {
+        newText += a;
+        spaceSeen = false
+      }
+    }
+    setText(newText)
   }
   const handleOnClickTitle = () => {
     const newText = text.split(" ").filter((ele) => {
@@ -25,6 +62,13 @@ function Form() {
       return ele.charAt(0).toUpperCase()+ele.slice(1).toLowerCase();
     }).join(" ");
     setText(newText);
+  }
+  const handleOnCopy = () => {
+    navigator.clipboard.writeText(text)
+    setCoptBtn('Copied')
+    setTimeout(() => {
+      setCoptBtn("Copy Text");
+    }, 2000);
   }
   const handleOnClear = () => {
     setText("");
@@ -44,14 +88,20 @@ function Form() {
           width: "100%",
         }}
       ></textarea>
-      <button onClick={handleOnClickUpper} className="btn btn-primary my-4">
+      <button onClick={handleOnClickUpper} className="btn btn-primary my-4 mx-4">
         UpperCase
       </button>
       <button
         onClick={handleOnClickLower}
-        className="btn btn-primary my-auto mx-4"
+        className="btn btn-primary my-auto mx-auto"
       >
         LowerCase
+      </button>
+      <button
+        onClick={handleOnClickSentence}
+        className="btn btn-primary mx-4 my-auto"
+      >
+        SentenceCase
       </button>
       <button onClick={handleOnClickTitle} className="btn btn-primary my-auto">
         TitleCase
@@ -59,7 +109,10 @@ function Form() {
       <button onClick={handleOnClickTrim} className="btn btn-primary mx-4 my-auto">
         Trim Text
       </button>
-      <button onClick={handleOnClear} className="btn btn-primary my-4">
+      <button onClick={handleOnCopy} className="btn btn-primary my-4">
+         {copyBtn}
+      </button>
+      <button onClick={handleOnClear} className="btn btn-primary mx-4 my-4">
          Clear
       </button>
 
