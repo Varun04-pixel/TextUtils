@@ -127,8 +127,8 @@ function Form() {
               return element.length !== 0;
             }).length
           }{" "}
-          words and {text.split(" ").filter((ele) => {
-            return ele!==""
+          words and {text.split("").filter((ele) => {
+            return ele!==" "
           }).length} characters
         </p>
         <p className="border rounded border-primary p-2 w-50">
