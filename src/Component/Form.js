@@ -1,8 +1,17 @@
 import React, { useState } from "react";
+import Alert from "./alert";
 
 function Form() {
   const [text, setText] = useState("");
-  const [copyBtn, setCoptBtn] = useState('Copy Text')
+  const [copyBtn, setCoptBtn] = useState('Copy Text');
+  const [alert, setAlert] = useState(null);
+
+  function showAlert(msg,type) {
+    setAlert({msg,type})
+    setTimeout(() => {
+      setAlert(null)
+    },1500)
+  }
 
   const trimText = (str) => {
     let newText = ''
@@ -18,6 +27,7 @@ function Form() {
         spaceSeen = false
       }
     }
+    showAlert("Removed extra spaces !!","success")
     return newText
   }
   const handleOnChange = (event) => {
@@ -25,10 +35,12 @@ function Form() {
   }
   const handleOnClickUpper = () => {
     const newText = text.toUpperCase();
+    showAlert("Text converted to UpperCase !!","success")
     setText(newText);
   }
   const handleOnClickLower = () => {
     const newText = text.toLowerCase();
+    showAlert("Text converted to LowerCase !!","success")
     setText(newText);
   }
   const handleOnClickSentence = () => {
@@ -53,6 +65,7 @@ function Form() {
         newText += trimmedText[i].toLowerCase();
       }
     }
+    showAlert("Text converted to SentenceCase !!","success")
     setText(newText);
   }
   const handleOnClickTrim = () => {
@@ -64,16 +77,19 @@ function Form() {
     }).map((ele) => {
       return ele.charAt(0).toUpperCase()+ele.slice(1).toLowerCase();
     }).join(" ");
+    showAlert("Text converted to TitleCase !!","success")
     setText(newText);
   }
   const handleOnCopy = () => {
     navigator.clipboard.writeText(text)
     setCoptBtn('Copied')
+    showAlert("Copied to clipboard !!","success")
     setTimeout(() => {
       setCoptBtn("Copy Text");
     }, 2000);
   }
   const handleOnClear = () => {
+    showAlert("Text cleared !!","success")
     setText("");
   }
   
@@ -118,6 +134,7 @@ function Form() {
       <button onClick={handleOnClear} className="btn btn-primary mx-4 my-auto">
          Clear
       </button>
+      <Alert alert={alert}/>  
 
       <div className="container my-4">
         <h2>Your Text Summary</h2>

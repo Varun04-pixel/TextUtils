@@ -1,11 +1,13 @@
 function Alert(props) {
-    return (
-    <>
-        <div className={`alert alert-${props.alert.type}`} role="alert">
-            {props.alert.msg}
-        </div>
-    </>
-    )
+    if(props.alert!==null) {
+        return (
+            <>
+                <div className={`alert alert-${props.alert.type}`} role="alert">
+                    {props.alert.msg}
+                </div>
+            </>
+        )
+    }
 }
 
 export default Alert;

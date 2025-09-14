@@ -15,22 +15,27 @@ function Nav(props) {
         document.body.style.color = '#ffffff';
       }
     }, [])
+
+    function showAlert(msg, type) {
+      setAlert({msg,type})
+    }
+
     function toggleMode() {
       if(mode === 'dark') {
         document.body.style.backgroundColor = '#ffffff';
         document.body.style.color = '#212529';
-        setAlert({
-          msg: "Light mode enabled !!",
-          type: "success"
-        })
+        showAlert("Light mode enabled !!", "primary")
+        setTimeout(() => {
+          setAlert(null)
+        },1500)
         setMode('light');
       } else {
         document.body.style.backgroundColor = '#212529';
         document.body.style.color = '#ffffff';
-        setAlert({
-          msg: "Dark mode enabled !!",
-          type: "success"
-        })
+        showAlert("Dark mode enabled !!", "primary")
+        setTimeout(() => {
+          setAlert(null)
+        },1500)
         setMode('dark');
       }
     }
@@ -65,8 +70,8 @@ function Nav(props) {
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
+              <ul className="navbar-nav ms-4 me-auto mb-2 mb-lg-0">
+                <li className="nav-item me-3">
                   <NavLink
                     className={({isActive}) => 'nav-link' + (isActive ? ' active' : '')}
                     aria-current="page"
@@ -75,7 +80,7 @@ function Nav(props) {
                     Home
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item me-3">
                   <NavLink
                     className={({isActive}) => 'nav-link' + (isActive ? ' active' : '')}
                     aria-current="page"
@@ -96,7 +101,7 @@ function Nav(props) {
             </div>
           </div>
         </nav>
-        <Alert mode={alert}/>
+        <Alert alert={alert}/>
       </>
     );
 }
